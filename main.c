@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-int check_sim(char A) {
-  switch (A){
+int check_sim(char A[], int k) {
+  switch (A[k]){
     case 'a':
       return 0;
     case 'b':
@@ -33,25 +33,25 @@ void print_board(char board[8][8]) {
         printf(" | %c", board[i][j]);
       }
       printf(" |\n");
-      printf("%d|___|___|___|___|___|___|___|___|\n", i);
+      printf("%d|___|___|___|___|___|___|___|___|\n", i+1);
     //  printf("| | | | | | | | |\n")
     }
 
 }
 
 void move(char board[8][8], int c){
-  char first[6];
+  char first[7];
   char tim;
   int i , j;
   printf("Input position of figure:");
   scanf("%s", first);
-  j = check_sim(first[0]);
-  i = first[1] - '0' + 1;
+  j = check_sim(first, 0);
+  i = first[1] - '0' - 1;
   tim = board[i][j];
   board[i][j] = ' ';
-  i = check_sim(first[3]);
-  j = first[4] - '0' + 1;
-  board[i][j] = tim;
+  i = check_sim(first, 3);
+  j = first[4] - '0' - 1;
+  board[j][i] = tim;
 
 }
 
