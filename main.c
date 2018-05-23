@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <ctype.h>
 int check_sim(char A[], int k) {
   switch (A[k]){
     case 'a':
@@ -25,17 +25,17 @@ int check_sim(char A[], int k) {
 
 int check_reg(char one, char two){
   int i, j;
-  if (one >= 'A' && one <= 'Z') {
+  if (isupper(one) != 0){
     i = 0;
   } else {
-    i = 1;
+    i = 1;;
   }
-  if (two >= 'A' && two <= 'Z') {
+  if (isupper(two) != 0){
     j = 0;
   } else {
     j = 1;
   }
-  if (i == j) {
+  if (j != i){
     return 0;
   } else {
     return 1;
@@ -44,7 +44,7 @@ int check_reg(char one, char two){
 
 void print_board(char board[8][8]) {
     int i, j;
-    printf("  A    B    C    D    E    F    G    H \n  _______________________________\n");
+    printf("   A   B   C   D   E   F   G   H \n  _______________________________\n");
     for(i = 0; i < 8; i++){
 
       for(j = 0; j < 8; j++){
@@ -69,9 +69,7 @@ void move(char board[8][8], int c){
   tim = board[i][j];
   k = check_sim(first, 3);
   l = first[4] - '0';
-  if (c = 0){
-    l--;
-  }
+  l--;
   tim1 = board[k][l];
   if (board[l][k] == ' '){
     board[i][j] = ' ';
