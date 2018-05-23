@@ -6,7 +6,6 @@
 
 
 int main() {
-    int i, j;
     int k = 0;
     char board[][8] = {
       "rnbqkbnr",

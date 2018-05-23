@@ -1,4 +1,5 @@
 *.log
 *.o
 *.bak
-*lab
+build/
+ignore/
