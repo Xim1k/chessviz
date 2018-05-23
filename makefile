@@ -16,4 +16,4 @@ ignore:
 	mkdir ignore
 
 clean:
-	rm -rf *.o 
+	rm -rf build/*.o ignore/*.o
