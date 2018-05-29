@@ -40,6 +40,7 @@ int check_reg(char one, char two){
   return 1;
 }
 
+
 void print_board(char board[8][8]) {
     int i, j;
     printf("   A   B   C   D   E   F   G   H \n  _______________________________\n");
@@ -81,6 +82,8 @@ void move(char board[8][8], int c){
     printf("Input another position\n");
   }
 }
+
+
 
 int checkmove(char board, int j, int i, int k, int l) {
   switch (board) {
