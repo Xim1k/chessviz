@@ -10,3 +10,4 @@ compiler:
 
 script:
   - make
+  - ./ignore/test/main
