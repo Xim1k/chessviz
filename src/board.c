@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "board.h"
 
+
 int check_sim(char A[], int k) {
   switch (A[k]){
     case 'a':
@@ -26,23 +27,17 @@ int check_sim(char A[], int k) {
   return -1;
 }
 
+
+
+
 int check_reg(char one, char two){
-  int i, j;
-  if (isupper(one) != 0){
-    i = 0;
-  } else {
-    i = 1;;
-  }
-  if (isupper(two) != 0){
-    j = 0;
-  } else {
-    j = 1;
-  }
-  if (j != i){
+  if (( one <= 'Z' && one >= 'A') && (two <= 'Z' && two >= 'A')){
     return 0;
-  } else {
-    return 1;
   }
+  if (( one <= 'z' && one >= 'a') && (two <= 'z' && two >= 'a')){
+    return 0;
+  }
+  return 1;
 }
 
 void print_board(char board[8][8]) {
@@ -70,17 +65,62 @@ void move(char board[8][8], int c){
   j = check_sim(first, 0);
   i = first[1] - '0' - 1;
   tim = board[i][j];
+  if (tim == ' '){
+    return;
+  }
   k = check_sim(first, 3);
   l = first[4] - '0';
   l--;
-  tim1 = board[k][l];
-  if (board[l][k] == ' '){
-    board[i][j] = ' ';
-    board[l][k] = tim;
-  } else {
-    if (check_reg(tim, tim1) == 1){
-      board[i][j] = ' ';
-      board[l][k] = tim;
-    }
+  tim1 = board[l][k];
+  if (checkmove(tolower(tim), j, i, k, l)){
+       if (check_reg(tim, tim1) == 1){
+          board[i][j] = ' ';
+          board[l][k] = tim;
+       }
+    } else {
+    printf("Input another position\n");
   }
+}
+
+int checkmove(char board, int j, int i, int k, int l) {
+  switch (board) {
+    case 'p' :
+       if ((j == k) && (((i + 1) == l) || ((i - 1) == l))) {
+         return 1;
+       } else {
+         return 0;
+       }
+    case 'r':
+       if ((j == k) || (i == l)) {
+         return 1;
+       } else {
+         return 0;
+       }
+    case 'n' :
+       if ((((j - 1) == k) && ((i + 2) == l)) || (((j + 1) == k) && ((i + 2) == l)) || (((j - 1) == k) && ((i - 2) == l)) || (((j + 1) == k) && ((i - 2) == l))) {
+         return 1;
+       } else {
+         return 0;
+       }
+    case 'k' :
+       if ((((j--) == k) && (i == l)) || (((j++) == k) && (i == l)) ||
+       ((j == k) && ((i++) == l)) || ((j == k) && ((i--) == l))) {
+         return 1;
+       } else {
+         return 0;
+       }
+    case 'b' :
+       if ((abs(j - k) - abs(i-l)) == 0) {
+         return 1;
+       } else {
+         return 0;
+       }
+    case 'q' :
+       if (((abs(j - k) - abs(i-l)) == 0) || ((j == k) || (i == l))) {
+          return 1;
+       } else {
+          return 0;
+       }
+  }
+  return -1;
 }
